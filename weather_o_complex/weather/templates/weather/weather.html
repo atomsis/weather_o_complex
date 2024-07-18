@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Погода в {{ city }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'weather/css/style_weather.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="weather-container">
+        <div class="color-block blue">
+            <h1>Погода в {{ city }}</h1>
+        </div>
+        <div class="color-block green">
+            <h2>Текущая погода:</h2>
+            <p>Текущая температура: {{ weather_data.current.temperature_2m }} °C</p>
+            <p>Относительная влажность: {{ weather_data.current.relative_humidity_2m }} %</p>
+            <p>Ощущаемая температура: {{ weather_data.current.apparent_temperature }} °C</p>
+            <p>Осадки: {{ weather_data.current.precipitation }} мм</p>
+            <p>Дождь: {{ weather_data.current.rain }} мм</p>
+            <p>Ливни: {{ weather_data.current.showers }} мм</p>
+            <p>Снегопад: {{ weather_data.current.snowfall }} мм</p>
+            <p>Облачность: {{ weather_data.current.cloud_cover }} %</p>
+            <p>Давление на уровне моря: {{ weather_data.current.pressure_msl }} гПа</p>
+            <p>Поверхностное давление: {{ weather_data.current.surface_pressure }} гПа</p>
+            <p>Скорость ветра: {{ weather_data.current.wind_speed_10m }} м/с</p>
+            <p>Направление ветра: {{ weather_data.current.wind_direction_10m }}°</p>
+            <p>Порывы ветра: {{ weather_data.current.wind_gusts_10m }} м/с</p>
+        </div>
+        <a href="{% url 'weather:input_city' %}" class="btn btn-primary btn-back">Вернуться к поиску</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

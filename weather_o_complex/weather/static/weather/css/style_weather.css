@@ -1,0 +1,42 @@
+/* static/weather/css/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container, .weather-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-container h2, .weather-container h1, .weather-container h2 {
+    margin-bottom: 20px;
+}
+
+.btn-custom {
+    margin-top: 10px;
+}
+
+.color-block {
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.color-block.blue {
+    background-color: #007bff;
+}
+
+.color-block.green {
+    background-color: #28a745;
+}
