@@ -61,18 +61,24 @@ def get_weather(lat, lon):
 
 
 def input_city(request):
-    last_searched_city = request.COOKIES.get('last_city', None)
+    last_searched_city = request.COOKIES.get("last_city", None)
     if request.method == "POST":
         form = CityForm(request.POST)
         if form.is_valid():
             city = form.cleaned_data["city"]
             # Set last city in cookie
             response = redirect("weather:weather", city=city)
-            response.set_cookie('last_city', smart_str(city), max_age=30 * 24 * 60 * 60)
+            response.set_cookie(
+                "last_city", city.encode("utf-8"), max_age=30 * 24 * 60 * 60
+            )
             return response
     else:
         form = CityForm()
-    return render(request, "weather/input_city.html", {"form": form, "last_city": last_searched_city})
+    return render(
+        request,
+        "weather/input_city.html",
+        {"form": form, "last_city": last_searched_city},
+    )
 
 
 def weather(request, city):
