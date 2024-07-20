@@ -1,5 +1,5 @@
 import pytest
-from weather.views import get_coordinates, get_weather, input_city, weather
+from weather_o_complex.weather.views import get_coordinates, get_weather, input_city, weather
 from django.urls import reverse
 
 

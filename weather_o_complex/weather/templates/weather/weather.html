@@ -3,14 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Погода в {{ city }}</title>
+    <title>Погода в городе {{ city }}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'weather/css/style_weather.css' %}" rel="stylesheet">
 </head>
 <body>
     <div class="weather-container">
         <div class="color-block blue">
-            <h1>Погода в {{ city }}</h1>
+            <h1>Погода в городе {{ city }}</h1>
+            <h3>Координаты чтобы вы могли убедиться сами:</h3>
+            <h4>Широта: {{ lat }}</h4>
+            <h4>Долгота: {{ lon }}</h4>
         </div>
         <div class="color-block green">
             <h2>Текущая погода:</h2>

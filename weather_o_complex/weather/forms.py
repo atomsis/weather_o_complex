@@ -1,5 +1,7 @@
+from dal import autocomplete
 from django import forms
 
-
 class CityForm(forms.Form):
-    city = forms.CharField(max_length=100)
+    city = forms.CharField(
+        label='Город',
+    )

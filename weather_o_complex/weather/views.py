@@ -1,12 +1,16 @@
 import requests
 from django.shortcuts import render, redirect
 from .forms import CityForm
-from django.utils.encoding import smart_str
-
+from urllib.parse import quote,unquote
+from django.http import JsonResponse
+from .models import CitySearchCount, SearchHistory
+from django.utils.timezone import now
+import json
+from django.http import HttpResponse
 
 def get_coordinates(city):
     url = f"https://nominatim.openstreetmap.org/search?q={city}&format=json&limit=1"
-    headers = {"User-Agent": "YourAppName/1.0 (test@example.com)"}
+    headers = {"User-Agent": "weather_o_complex/1.0 (test@example.com)"}
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -62,14 +66,27 @@ def get_weather(lat, lon):
 
 def input_city(request):
     last_searched_city = request.COOKIES.get("last_city", None)
+
+    if last_searched_city:
+        last_searched_city = unquote(last_searched_city)
+
     if request.method == "POST":
         form = CityForm(request.POST)
         if form.is_valid():
             city = form.cleaned_data["city"]
-            # Set last city in cookie
+
+            SearchHistory.objects.create(
+                city=city,
+                ip_address=request.META.get('REMOTE_ADDR', '0.0.0.0')
+            )
+
+            city_count, created = CitySearchCount.objects.get_or_create(city=city)
+            city_count.count += 1
+            city_count.save()
+
             response = redirect("weather:weather", city=city)
             response.set_cookie(
-                "last_city", city.encode("utf-8"), max_age=30 * 24 * 60 * 60
+                "last_city", quote(city), max_age=30 * 24 * 60 * 60
             )
             return response
     else:
@@ -86,9 +103,16 @@ def weather(request, city):
     if lat is not None and lon is not None:
         weather_data = get_weather(lat, lon)
         if weather_data:
-            context = {"weather_data": weather_data, "city": city}
+            context = {"weather_data": weather_data, "city": city,'lat':lat,'lon':lon}
             return render(request, "weather/weather.html", context)
     context = {
         "message": "Не удалось получить данные о погоде. Пожалуйста, попробуйте позже."
     }
     return render(request, "weather/error.html", context)
+
+def city_statistics(request):
+    city_counts = CitySearchCount.objects.all()
+    data = {city.city: city.count for city in city_counts}
+    json_data = json.dumps(data, indent=4, ensure_ascii=False)
+    return HttpResponse(json_data, content_type='application/json')
+
