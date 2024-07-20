@@ -4,6 +4,7 @@
 - Django 4.2.14-
 - django-autocomplete-light 3.11.0
 - pytest 8.2.2
+- pytest-django 4.8.0
 - requests 2.32.3
 - black 24.4.2
 - Sqlite
