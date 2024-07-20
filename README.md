@@ -22,12 +22,15 @@
 - weather_o_complex - ядро проекта:настройки, главная точка входа и подобная настройка приложения, работает синхронно, с "домашней" БД Sqlite
 ## Как запускать проект:
 - Без докера:
-- - ```
-  git clone https://github.com/atomsis/weather_o_complex
-  ```
-- - ```pip install - r requirements.txt
+  - ```
+      git clone https://github.com/atomsis/weather_o_complex
+    ```
+  - ```
+      pip install - r requirements.txt
     ```
 - С docker:
-- -``` docker compose up --build```
+  - ```
+      docker compose up --build
+    ```
 ## Как проверять функционал 
 
