@@ -26,7 +26,7 @@
       git clone https://github.com/atomsis/weather_o_complex
     ```
   - ```
-      pip install - r requirements.txt
+      pip install -r requirements.txt
     ```
 - С docker:
   - ```
