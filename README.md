@@ -1,7 +1,8 @@
 # Данный проект реализует простой "прогнозёр" погоды
 ## Используемые технологии:
 - Python 3.8
-- Django 4.2.14
+- Django 4.2.14-
+- django-autocomplete-light 3.11.0
 - pytest 8.2.2
 - requests 2.32.3
 - black 24.4.2
