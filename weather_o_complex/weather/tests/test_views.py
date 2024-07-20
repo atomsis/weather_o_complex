@@ -1,5 +1,5 @@
 import pytest
-from weather_o_complex.weather.views import get_coordinates, get_weather, input_city, weather
+from ..views import get_coordinates, get_weather, input_city, weather
 from django.urls import reverse
 
 
@@ -47,7 +47,7 @@ def test_weather_view(client):
     url = reverse("weather:weather", kwargs={"city": "London"})
     response = client.get(url)
     assert response.status_code == 200
-    assert "Погода в London" in response.content.decode()
+    assert "Погода в городе London" in response.content.decode()
 
     url = reverse("weather:weather", kwargs={"city": "InvalidCityName"})
     response = client.get(url)
